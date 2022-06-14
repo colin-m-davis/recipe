@@ -5,7 +5,12 @@ class Ingredient extends React.Component{
     render() {
         return (
             <div>
-                <p>I am an ingredient!!!</p>
+                <input>
+                </input>
+                <select>
+                    <option value='liters'>L</option>
+                    <option value='grams'>g</option>
+                </select>
             </div>
         )
     }
@@ -15,13 +20,22 @@ class Ingredient extends React.Component{
 class Recipe extends React.Component {
     constructor(props) {
         super(props);
+        this.defaultTitle = 'My Recipe'
         this.state = {
             numIngredients: 0,
+            recipeTitle: this.defaultTitle,
         };
-        this.handleClick = this.handleClick.bind(this); //WTF
+        this.handleClick = this.handleClick.bind(this);
     }
     componentDidMount() {
-        this.title.focus();
+        this.titleInput.focus();
+    }
+    handleChange = (e) => {
+        var s = e.target.value;
+        if (s == '') {
+            s = this.defaultTitle
+        }
+        this.setState({recipeTitle: s})
     }
     handleClick() {
         const i = this.state.numIngredients + 1;
@@ -30,16 +44,25 @@ class Recipe extends React.Component {
     render() {
         return (
             <div>
-                <h1>New Recipe</h1>
+                <h1 className='title-display'
+                    style={{
+                        color: this.state.recipeTitle == this.defaultTitle ? 'grey' : 'black'
+                    }}>
+                    {this.state.recipeTitle}</h1>
                 <input 
-                    className = 'recipe-titleInput'
-                    ref={title => (this.title = title)}
+                    ref={titleInput => (this.titleInput = titleInput)}
+                    type='text'
+                    onChange={this.handleChange}
                 />
                 <button
                     onClick = {this.handleClick}
                 >
                     {this.state.numIngredients}
                 </button>
+                <hr />
+                {
+                    Array.from({length: this.state.numIngredients}, (v, i) => <Ingredient key={i}/>)
+                }
             </div>
         );
     }
