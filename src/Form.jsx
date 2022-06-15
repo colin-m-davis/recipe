@@ -1,63 +1,38 @@
-import React from 'react';
+import './Form.css';
+import React, { useState } from 'react';
 
+const Form = (props) => {
 
-export default class Form extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            title: '',
-            ingredients: [],
-        };
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    createIngredientList() {
-        return this.state.ingredients.map((ele, i) =>
-            <div key={i}>
-                <input type='text' placeholder='new ingredient' value={ele||''} onChange={this.handleIngredientChange.bind(this, i)}/>
-                <input type='button' value='remove' onClick={this.removeClick.bind(this, i)}/>
-            </div>
-        )
-    }
-
-    handleTitleChange(e) {
-        let title = this.state.title;
-        title = e.target.value;
-        this.setState({title: title});
-    }
-
-    handleIngredientChange(e, i) {
-        let ingredients = [...this.state.ingredients];
-        ingredients[i] = e.target.value;
-        this.setState({ingredients: ingredients});
-    }
-
-    addClick() {
-        let ingredients = [...this.state.ingredients];
-        ingredients.push('');
-        this.setState({ingredients: ingredients});
-    }
-
-    removeClick(i) {
-        let ingredients = [...this.state.ingredients];
-        ingredients.splice(i, 1);
-        this.setState({ingredients: ingredients});
-    }
-
-    handleSubmit(e) {
-        console.log('submit request logged')
-        {/*SEND THINGS TO BACKEND IN A NICE LITTLE PACKAGE*/}
+    const onSubmit = e => {
         e.preventDefault();
-    }
+        // todo - Send data to backend
+    };
 
-    render() {
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <input type='text' placeholder='recipe title' onChange={this.handleTitleChange.bind(this)}/>
-                {this.createIngredientList}
-                <input type='button' value='add' onClick={this.addClick.bind(this)}/>
-                <input type='Submit' value='save' onClick={this.handleSubmit.bind(this)}/>
+    return (
+        <div className='Form'>
+            <form>
+                <div>
+                    <input
+                        placeholder='title'
+                        value={props.formData.title}
+                        onChange={event => props.titleChangeHandler(event)}
+                    />
+                </div>
+                {props.formData.ingredients.map((element, index) => {
+                    return (
+                        <div key={index}>
+                            <input
+                                name='name'
+                                placeholder='new ingredient'
+                                value={element.name}
+                                onChange={event => props.ingredientChangeHandler(index, event)}
+                            />
+                        </div>
+                    )
+                })}
             </form>
-        )
-    }
+        </div>
+    )
 }
+
+export default Form;
