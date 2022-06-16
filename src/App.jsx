@@ -8,18 +8,46 @@ function App() {
     { title: '', ingredients: [{name: ''}, {name: 'barry bonds'}] }
   )
 
-  const handleTitleChange = (event) => {
-    let data = {...formData} 
-    data.title = event.target.value;
+  // Handle change in input value according to event.target.className
+  const handleInputChange = (index, event) => {
+    let data = {...formData}
+    let cName = event.target.className;
+    switch(cName) {
+      case 'title':
+        data.title = event.target.value;
+        break;
+      case 'ingredient':
+        data.ingredients[index][event.target.name] = event.target.value;
+        break;
+    }
     setFormData(data)
-    console.log('Title Change Event handled')
   }
 
-  const handleIngredientChange = (index, event) => {
-    const data = {...formData};
-    data.ingredients[index][event.target.name] = event.target.value;
+  // Add ingredient *after* the specified index
+  const handleAddIngredient = (index, event) => {
+    let data = {...formData}
+    data.ingredients.splice(index+1, 0, {name: ''})
     setFormData(data)
-    console.log('Ingredient Name Change Event handled')
+  }
+
+  // Remove ingredient at the specified index
+  const handleRemoveIngredient = (index, event) => {
+    let data = {...formData}
+    data.ingredients.splice(index, 1)
+    setFormData(data)
+  }
+
+  // Handle key down event according to event.key
+  const handleKeyDown = (index, event) => {
+    let key = event.key;
+    switch(key) {
+      case 'Enter':
+        handleAddIngredient(index, event)
+        break;
+      case 'z':
+        console.log('press z')
+        break;
+    }
   }
 
   return (
@@ -27,6 +55,10 @@ function App() {
       formData={formData}
       titleChangeHandler={handleTitleChange}
       ingredientChangeHandler={handleIngredientChange}
+      addIngredientHandler={handleAddIngredient}
+      removeIngredientHandler={handleRemoveIngredient}
+      keyDownHandler={handleKeyDown}
+      inputChangeHandler={handleInputChange}
     />
   );
 }

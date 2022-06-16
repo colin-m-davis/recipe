@@ -2,18 +2,4 @@
   text-align: left;
 }
 
-.App-header {
-  background-color: #282e2d;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: normal;
-  justify-content: normal;
-  font-size: calc(10px + 2vmin);
-  color: green;
-  padding: calc(5px + 1vmin);
-}
 
-.App-link {
-  color: #c4b542;
-}

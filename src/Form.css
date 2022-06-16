@@ -4,12 +4,34 @@
 
 input {
     outline: none;
+    border: none;
     background-color: rgba(45, 45, 45, 0.846);
+}
+
+input[type=text] {
     font-size: 50px;
     font-weight: 700;
 }
 
-input[type=button], input[type=Submit] {
-    outline: none;
-    background-color:blue
+.wrapper {
+    height:100px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.ingredientName {
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+    width: 300px;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.ingredientRemove {
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+    height: 80px;
+    width: 80px;
 }
