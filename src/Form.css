@@ -1,5 +1,5 @@
 * {
-    color:rgba(235, 235, 235, 0.846)
+    color:rgba(235, 235, 235, 0.846);
 }
 
 input {
@@ -9,14 +9,23 @@ input {
 }
 
 input[type=text] {
-    font-size: 50px;
+    font-size: 18px;
     font-weight: 700;
 }
 
 .wrapper {
-    height:100px;
+    height:30px;
     padding-top: 10px;
     padding-left: 10px;
+}
+
+.ingredientQty {
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+    width: 100px;
+    height: 100%;
+    margin-right: 10px;
 }
 
 .ingredientName {
@@ -32,6 +41,6 @@ input[type=text] {
     display: inline-block;
     vertical-align: middle;
     box-sizing: border-box;
-    height: 80px;
-    width: 80px;
+    height: 90%;
+    width: 72px;
 }
